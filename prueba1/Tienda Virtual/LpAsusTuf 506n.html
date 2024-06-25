@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container, .description {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 20px;
+        }
+       .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Cambio a columna por defecto */
+}
+
+.left, .right {
+    padding: 20px;
+}
+
+.left img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Para evitar espacios vacíos debajo de la imagen */
+    margin: 0 auto; /* Centra la imagen */
+}
+
+.right {
+    text-align: center; /* Centra el texto */
+}
+
+/* Media queries */
+@media screen and (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Cambia a fila cuando la pantalla es más grande */
+    }
+    .left, .right {
+        flex: 1; /* Ambos ocupan el mismo espacio */
+    }
+    .left {
+        padding-right: 0; /* Quita el padding derecho de la imagen */
+    }
+    .right {
+        padding-left: 0; /* Quita el padding izquierdo del texto */
+        text-align: left; /* Alinea el texto a la izquierda */
+    }
+}
+
+
+@media (max-width: 480px) {
+    .product {
+        width: calc(100% - 40px); /* Un producto por fila con un pequeño espacio en los lados */
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+		
+		
+		
+        .description {
+            padding: 20px;
+        }
+        .description h2 {
+            margin-top: 0;
+        }
+        .description ul {
+            list-style: none;
+            padding: 0;
+        }
+        .description li {
+            padding: 5px 0;
+        }
+        .description li span {
+            font-weight: bold;
+        }
+		
+		.add-to-cart {
+    background-color: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+	text-decoration: none; /* Quita la línea de abajo */
+}
+
+.add-to-cart:hover {
+    background-color: #3700b3;
+}
+
+#products {
+	
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    justify-content: space-between; /* Añadido para espaciar elementos */
+}
+
+.product {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: calc(100% / 6 - 20px); /* 6 productos por fila */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+    .product {
+        width: calc(100% / 3 - 20px); /* 3 productos por fila */
+    }
+}
+
+@media (max-width: 768px) {
+    .product {
+        width: calc(100% / 2 - 20px); /* 2 productos por fila */
+    }
+}
+
+@media (max-width: 480px) {
+    .product {
+        width: 100%; /* 1 producto por fila */
+    }
+}
+
+
+#cart {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+#cart-items li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.encabezadoimg {
+    width: 100%;
+    height: 500px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="Img/NOTEBOOK-ASUS-TUF-GAMING-A15-1.png" alt="Laptop ASUS TUF Gaming">
+        </div>
+        <div class="right">
+            <h1>LAPTOP ASUS TUF GAMING FA506N A15 RYZEN 5 7535HS - 5.0GHz / RTX 3050 4GB / 15" FULLHD 144HZ / RAM 8GB 4800MHZ DDR5 SO-DIMM / SSD 512GB PCIE 4.0 M.2 NVME</h1>
+		<div class="price-container">
+            <p style="font-size: 30px; color:#0058d2;"><del style="color: #4a5576;">L 22000.00</del> <span style="font-size: 30px;">    L 20375.00</span></p>
+        </div>
+            <a href="#" class="add-to-cart">Agregar Al Carrito</a>
+            <ul>
+                <li>12 Meses Garantía</li>
+                <li>Producto Nuevo</li>
+                <li>Compra Online 100% Seguro</li>
+                <li>Precio Incluye IGV</li>
+                <li>Precio Sujeto a Tipo de Cambio del Día</li>
+                <li>Pago con Tarjetas, recargo del 5% adicional al precio mostrado</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="description">
+        <h2>Descripción</h2>
+        <ul>
+            <li><span>Marca:</span> Asus</li>
+            <li><span>Modelo:</span> TUF GAMING FA506N</li>
+            <li><span>Sistema Operativo:</span> Windows 11 Home</li>
+            <li><span>Procesador:</span> AMD Ryzen™ 5 7535HS 3.3GHz (19MB Cache, hasta 4.55 GHz, 6 Núcleos, 12 Subprocesos)</li>
+            <li><span>Tarjeta Gráfica:</span> NVIDIA GeForce RTX™ 3050 (4GB GDDR6)</li>
+            <li><span>Memoria RAM:</span> 8GB DDR5 (Expandible a 32GB)</li>
+            <li><span>Almacenamiento:</span> 512GB SSD</li>
+            <li><span>Pantalla:</span> 15" FHD (1920 x 1080) 16:9/144Hz</li>
+            <li><span>Teclado:</span> En español, retroiluminado</li>
+            <li><span>Color:</span> Negro Grafito</li>
+            <li><span>Tecnologías:</span> Wi-Fi 6(802.11ax) (Doble banda) 2*2 + Bluetooth® 5.3</li>
+            <li><span>Garantía:</span> 1 año</li>
+        </ul>
+    </div>
+	<br>
+		<br>
+		<h1 style="text-align: center">Productos Relacionados</h1>
+        <section id="products">
+            <div class="product" id="product1">
+                <img src="Img/NOTEBOOK-LENOVO-V15-G3-IAP-15.6-82TT00EALM.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Oficina Lenovo V15 G3 IAP 15.6″ FHD TN / Intel i3 1215U 4.4GHz </p>
+				<br>
+                <p><B>Precio: L8500.00</B></p>
+                <button class="add-to-cart" data-product-id="1" data-product-name="Laptop Oficina Lenovo V15">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product2">
+                <img src="Img/82JW00Q5LM-LAPTOP-LENOVO-LEGION-5-15.6-FHD-IPS-AMD-RYZEN-7-5800H-3.2-4.4GHZ-16GB-DDR4-3200MHZ.png" alt="Producto 2">
+				<h3>Disponible</h3>
+                <p>LAPTOP LENOVO LEGION 5 RYZEN 7 5800H 15.6″ FULLHD</p>
+				<br>
+                <p><b>Precio: L24750.00</b></p>
+                <button class="add-to-cart" data-product-id="2" data-product-name="LAPTOP LENOVO LEGION 5">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product3">
+                <img src="Img/NOTEBOOK-ASUS-FX507ZC4-HN002-15.6-90NR0GW1-M001F0.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Avanzada ASUS TUF FX507ZC4-HN002 15.6″ FHD IPS</p>
+				<br>
+                <p><b>Precio: L29250.00</b></p>
+                <button class="add-to-cart" data-product-id="3" data-product-name="Laptop Avanzada ASUS TUF FX507ZC4">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product4">
+                <img src="Img/NOTEBOOK-ASUS-FA507RF-HN018-15.6-90NR0HA1-M003Y0.png" alt="Producto 2">
+				<h3>Disponible</h3>
+                <p>LAPTOP ASUS TUF GAMING FA506N A15 15″ FULL HD</p>
+				<br>
+                <p><b>Precio: L20250.00</b></p>
+                <button class="add-to-cart" data-product-id="4" data-product-name="LAPTOP ASUS TUF GAMING A15">Añadir al carrito</button>
+            </div>
+			<div class="product" id="product5">
+                <img src="Img/NOTEBOOK-ASUS-FA507RF-HN018-15.6-90NR0HA1-M003Y0.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Avanzada ASUS TUF FA507RF-HN018 15.6″ FHD</p>
+				<br>
+                <p><b>Precio: L20750.00</b></p>
+                <button class="add-to-cart" data-product-id="5" data-product-name="Laptop Avanzada ASUS TUF FA507RF">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product6">
+                <img src="Img/RTX-4060-8gb-msi-ventus-x2-white.png">
+				<h3>Disponible</h3>
+                <p>TARJETA GRAFICA MSI RTX 4060 8GB WHITE VENTUS GDDR6 FANS</p>
+				<br>
+                <p><b>Precio: L9375.00</b></p>
+                <button class="add-to-cart" data-product-id="6" data-product-name="TARJETA GRAFICA MSI RTX 4060">Añadir al carrito</button>
+            </div>
+        </section>
+	<script src="scripts.js"></script>
+</body>
+</html>

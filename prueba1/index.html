@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda Virtual</title>
+    <link rel="stylesheet" href="Tienda Virtual/styles.css">
+    <style>
+        .increase-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.increase-button:hover {
+    background-color: #0056b3;
+}
+
+.decrease-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.decrease-button:hover {
+    background-color: #c82333;
+}
+
+.product {
+    transition: box-shadow 0.3s ease;
+}
+
+.product:hover {
+    box-shadow: 0 0 20px rgba(0, 64, 255, 0.818); /* Sombra roja al pasar el mouse */
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Fondo claro */
+}
+
+nav {
+    background-color: #1c1c1c;
+    padding: 10px 20px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+}
+
+.search input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-count {
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submenu li {
+    width: 200px;
+}
+
+.submenu li a {
+    padding: 10px 15px;
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+.submenu li a:hover {
+    background-color: #f0f0f0;
+}
+
+.submenu li:last-child a {
+    border-bottom: none;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .submenu {
+    left: 100%;
+    top: 0;
+    margin-left: 1px;
+}
+
+.dropdown-submenu:hover > .submenu {
+    display: block;
+}
+
+/* Especifico para el diseño del logo */
+.logo img {
+    max-height: 40px; /* Ajusta la altura del logo si es necesario */
+}
+
+/* Ajuste para la búsqueda y los íconos */
+.search input {
+    width: 200px; /* Ajusta el ancho de la barra de búsqueda */
+}
+
+/* Estilo para la imagen del carrito */
+.carrito-icon {
+        width: 30px; /* Ajusta el tamaño de la imagen según tus necesidades */
+        height: auto;
+        vertical-align: middle; /* Alinea la imagen verticalmente con el texto */
+        cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+        transition: transform 0.3s; /* Efecto de transformación suave */
+        padding: 0 15px; /* Añade padding de 15px hacia la izquierda y hacia la derecha */
+    }
+
+    .carrito-icon:hover {
+        transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el ratón */
+    }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li class="logo"><a href="#"><img src="Tienda Virtual/logopagtienda1.png" alt="Logo"></a></li>
+            <li class="menu-item dropdown">
+                <a href="#" class="menu-link">Componentes</a>
+                <ul class="submenu">
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Almacenamiento</a></li>
+                    <li><a href="#">Periféricos</a></li>
+                    <li><a href="#">Case</a></li>
+                    <li><a href="#">Cooler y Refrigeración</a></li>
+                    <li><a href="#">Fuentes de Poder</a></li>
+                    <li><a href="#">Memorias RAM</a></li>
+                    <li><a href="#">Placas Base</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Tarjetas Gráficas</a></li>
+                </ul>
+            </li>
+            <li class="menu-item dropdown">
+                <a href="#" class="menu-link">Computadoras</a>
+                <ul class="submenu">
+                    <li><a href="#">PC Gamer</a></li>
+                    <li><a href="#">PC Productividad</a></li>
+                    <li><a href="#">PC Completa</a></li>
+                </ul>
+            </li>
+            <li class="menu-item"><a href="#" class="menu-link">Laptops</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Monitores</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Periféricos</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Ofertas</a></li>
+            <li class="menu-item search"><input type="text" placeholder="Buscar productos"></li>
+            <li class="menu-item">
+                <a href="#" id="carrito-link"><img src="Tienda Virtual/Img/3144456.png" alt="Carrito de Compras" class="carrito-icon"></a>
+            </li>
+        </ul>
+    </nav>
+	<div id="carrito-contenedor" class="oculto">
+        <button id="boton-cerrar" class="boton-cerrar">X</button>
+        <section id="cart">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items" class="cart-items-container">
+                <!-- Los elementos del carrito se añadirán dinámicamente aquí -->
+            </div>
+            <p id="total-price">Total: $0.00</p>
+        </section>
+    </div>
+	<img class="encabezadoimg" src="Tienda Virtual/Img/Tu PC gaming ideal te espera en Gamer Store.  Elige entre nuest.png">
+		<br>
+		<br>
+		<h1 style="text-align: center">Nuevos Ingresos</h1>
+        <section id="products">
+            <div class="product" id="product1">
+                <img src="Tienda Virtual/Img/NOTEBOOK-LENOVO-V15-G3-IAP-15.6-82TT00EALM.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Oficina Lenovo V15 G3 IAP 15.6″ FHD TN / Intel i3 1215U </p>
+				<br>
+                <p><B>Precio: L8,500.00</B></p>
+                <button class="add-to-cart" data-product-id="1" data-product-name="Laptop Oficina Lenovo V15">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product2">
+                <img src="Tienda Virtual/Img/82JW00Q5LM-LAPTOP-LENOVO-LEGION-5-15.6-FHD-IPS-AMD-RYZEN-7-5800H-3.2-4.4GHZ-16GB-DDR4-3200MHZ.png" alt="Producto 2">
+				<h3>Disponible</h3>
+                <p>LAPTOP LENOVO LEGION 5 RYZEN 7 5800H 15.6″ FULLHD</p>
+				<br>
+                <p><b>Precio: L24,750.00</b></p>
+                <button class="add-to-cart" data-product-id="2" data-product-name="LAPTOP LENOVO LEGION 5">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product3">
+                <img src="Tienda Virtual/Img/NOTEBOOK-ASUS-FX507ZC4-HN002-15.6-90NR0GW1-M001F0.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Avanzada ASUS TUF FX507ZC4-HN002 15.6″ FHD IPS</p>
+				<br>
+                <p><b>Precio: L29,250.00</b></p>
+                <button class="add-to-cart" data-product-id="3" data-product-name="Laptop Avanzada ASUS TUF FX507ZC4">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product4">
+                <img src="Tienda Virtual/Img/NOTEBOOK-ASUS-FA507RF-HN018-15.6-90NR0HA1-M003Y0.png" alt="Producto 2">
+				<h3>Disponible</h3>
+                <p>LAPTOP ASUS TUF GAMING FA506N A15 15″ FULL HD</p>
+				<br>
+                <p><b>Precio: L20,250.00</b></p>
+                <button class="add-to-cart" data-product-id="4" data-product-name="LAPTOP ASUS TUF GAMING A15">Añadir al carrito</button>
+            </div>
+			<div class="product" id="product5">
+                <img src="Tienda Virtual/Img/NOTEBOOK-ASUS-FA507RF-HN018-15.6-90NR0HA1-M003Y0.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Avanzada ASUS TUF FA507RF-HN018 15.6″ FHD</p>
+				<br>
+                <p><b>Precio: L20,750.00</b></p>
+                <button class="add-to-cart" data-product-id="5" data-product-name="Laptop Avanzada ASUS TUF FA507RF">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product6">
+                <img src="Tienda Virtual/Img/RTX-4060-8gb-msi-ventus-x2-white.png">
+				<h3>Disponible</h3>
+                <p>TARJETA GRAFICA MSI RTX 4060 8GB WHITE VENTUS GDDR6 FANS</p>
+				<br>
+                <p><b>Precio: L9,375.00</b></p>
+                <button class="add-to-cart" data-product-id="6" data-product-name="TARJETA GRAFICA MSI RTX 4060">Añadir al carrito</button>
+            </div>
+        </section>
+	<br>
+	<br>
+		<img src="Tienda Virtual/Img/13529704640078713748.jpg" style="width: 100%">
+		<br>
+		<br>
+		<br>
+		<br>
+	<div class="contenedor-principal">
+		<br>
+	<br>
+	<br>
+	<h3 style="font-size: 40px; text-align: center; color: white">Computadoras Pre- Configuradas</h3>
+	<br>
+	<br>
+	<br>
+	<div class="contenedor-imagen">
+  	<img class="imagen" src="Tienda Virtual/Img/IATRABAJO.jpg" alt="Imagen 1">
+		<div class="texto">
+        <h2 style="font-family: 'Arial', sans-serif;">Oficina</h2>
+        <p style="font-family: 'Arial', sans-serif;">Computadoras para uso estudiantes, oficina, Desarrollo Software</p>
+        <button style="margin-top: 10px;">Comprar</button>
+    	</div>
+	</div>
+
+	
+	<div class="contenedor-imagen">
+  	<img class="imagen" src="Tienda Virtual/Img/clfg0a1qg0014mo085o2948no_1.jpg" alt="Imagen 2">
+		<div class="texto">
+        <h2 style="font-family: 'Arial', sans-serif;">Gamer</h2>
+        <p style="font-family: 'Arial', sans-serif;">Desde Jugar por Diversión con tus amigos a Streaming Profesional</p>
+        <button style="margin-top: 10px;" class="custom-button"><A href="Tienda Virtual/pruebaxd.html" class="button-link">Comprar</A></button>
+		</div>
+	</div>
+	<!-- Contenedor de la tercera imagen -->
+	<div class="contenedor-imagen">
+  	<img class="imagen" src="Tienda Virtual/Img/OIG4.jpg" alt="Imagen 3">
+		<div class="texto">
+        <h2 style="font-family: 'Arial', sans-serif;">Productividad</h2>
+        <p style="font-family: 'Arial', sans-serif;">Más rendimiento en CAD, Animación 3D, Renders y más</p>
+        <button style="margin-top: 10px;">Comprar</button>
+		</div>	
+	</div>
+	</div>
+	<br>
+	<h3 style="font-size: 40px; text-align: center; color: black;">Preguntas Frecuentes</h3>
+	<h4 style="text-align: center; color: #2c2c2c;">Si tienes más consultas, puedes escribir a un asesor, te ayudaran. </h4>
+	<div class="cards">
+	
+            <div class="card">
+                <div class="icon blue"><i class="fas fa-truck"></i></div>
+                <h3 style="color:#006aff;">Envíos a Toda Honduras</h3>
+                <p>Envíos diarios a Municipios de Colón via Cargo Honduras, Urgente Express u Rapido Cargo, llegan a todo Honduras. Si tienes una agencia de tu preferencia, lo indicas.</p>
+            </div>
+            <div class="card">
+                <div class="icon purple"><i class="fas fa-shipping-fast"></i></div>
+                <h3 style="color:#5900ff;">Delivery Gamer Store Tocoa</h3>
+                <p>Tú puedes programar la hora que quieres recibir tu pedido. Entregamos en menos de 24h a todo Tocoa.</p>
+            </div>
+            <div class="card">
+                <div class="icon green"><i class="fas fa-wrench"></i></div>
+                <h3 style="color:#00ff62;"><b>Atención Garantías</b></h3>
+                <p>6 Meses Garantía por Falla de Fábrica. Contacta con tu asesor de venta y te ayudará con los pasos para Trámitar Garantía.</p>
+            </div>
+            <div class="card">
+                <div class="icon green"><i class="fas fa-store"></i></div>
+                <h3 style="color:#008f1f;">Nuestra Tienda</h3>
+                <p>Puedes comprar online via whatsapp o Presencial en nuestro local. Además, puedes recoger tus pedidos en nuestra tienda.</p>
+            </div>
+            <div class="card">
+                <div class="icon blue"><i class="fas fa-clock"></i></div>
+                <h3 style="color:#003a8c;">Horario Atención</h3>
+                <p>Lunes a Viernes 10 AM a 6 PM y Domingos 10 AM a 5 PM. No hay atención Sabados y feriados. Online</p>
+            </div>
+            <div class="card">
+                <div class="icon red"><i class="fas fa-money-bill-wave"></i></div>
+                <h3 style="color:#ff1d7f;">Medios de Pago</h3>
+                <p>Aceptamos Efectivo, Deposito/Transferencia y Tarjetas de Crédito.</p>
+            </div>
+        </div>
+    </div>
+	<footer>
+        <div class="footer-container">
+            <div class="footer-content-container">
+                <h3 class="website-logo">Gamer Store</h3>
+                <span class="footer-info">+504 9632 1907</span>
+                <span class="footer-info">tiendagamerstore1@gmail.com</span>
+            </div>
+            <div class="footer-menus">
+                <div class="footer-content-container">
+                    <span class="menu-title">menu</span>
+                    <a href="" class="menu-item-footer">Inicio</a>
+                    <a href="" class="menu-item-footer">Productos</a>
+                    <a href="" class="menu-item-footer">Preguntas Frecuentes</a>
+                </div>
+                <div class="footer-content-container">
+                    <span class="menu-title">legal</span>
+                    <a href="" class="menu-item-footer">Politica de Privacidad</a>
+                    <a href="" class="menu-item-footer">Cookies</a>
+                    <a href="" class="menu-item-footer">Legal Advice</a>
+                </div>
+            </div>
+            
+            <div class="footer-content-container">
+                <span class="menu-title">follow us</span>
+                <div class="social-container">
+                    <a href="" class="social-link"></a>
+                    <a href="" class="social-link"></a>
+                    <a href="" class="social-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-container">
+            <span class="copyright"> © Copyright 2024, Augusto Melara. Derechos Reservados.</span>
+        </div>
+    </footer>
+
+    <script src="Tienda Virtual/scripts.js"></script>
+</body>
+</html>

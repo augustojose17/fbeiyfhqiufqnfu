@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda Virtual</title>
+    <link rel="stylesheet" href="Tienda Virtual/styles.css">
+    <style>
+       header {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            background-color: black;
+            height: 92px;
+            z-index: 10;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            padding-left: 5%;
+            padding-right: 5%;
+            font-weight: bold;
+        }
+        img.logo {
+            width: 100px;
+        }
+        ul li {
+            display: inline-block;
+            padding: 0px 20px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        a:hover { 
+            color: aqua;
+        }
+        #carrito-contenedor {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100%;
+            background-color: #f8f9fa;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .boton-cerrar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #333;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease; /* Transición del color al pasar el ratón */
+        }
+        .boton-cerrar:hover {
+            color: #f00;
+        }
+        .oculto {
+            transform: translateX(100%);
+        }
+        #carrito-contenedor.mostrar {
+            transform: translateX(0);
+        }
+        .product-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item img {
+            width: 60px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .cart-item h4 {
+            margin: 0;
+            font-size: 1em;
+        }
+        .cart-item p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        #cart h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #total-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .add-to-cart {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+        .contenedor-principal {
+            max-width: 100%;
+            background-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1));
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contenedor-imagen {
+            width: 420px; 
+            height: 420px; 
+            overflow: hidden; 
+            border: 1px solid #ccc;
+            display: inline-block; 
+            margin: 0 5px;
+            border-radius: 15px;
+            position: relative;
+        }
+        .imagen {
+            width: 100%; 
+            height: auto; 
+            transition: transform 1s;
+        }
+        .imagen:hover {
+            transform: scale(1.2); 
+        }
+        .texto {
+            position: absolute;
+            bottom: 20px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .texto h2 {
+            margin-bottom: 10px;
+            color: white; 
+        }
+        .texto p {
+            color: white; 
+        }
+        .texto button {
+            border: 1px solid white; 
+            background-color: transparent; 
+            color: transparent; 
+            padding: 10px 20px; 
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s; 
+            color: white;
+        }
+        .texto button:hover {
+            background-color: white; 
+            color: black;
+        }
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+            justify-content: space-between; 
+        }
+        .product {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: calc(100% / 6 - 20px); 
+            text-align: center;
+            box-sizing: border-box;
+        }
+        @media (max-width: 1200px) {
+            .product {
+                width: calc(100% / 3 - 20px); 
+            }
+        }
+        @media (max-width: 768px) {
+            .product {
+                width: calc(100% / 2 - 20px);
+            }
+        }
+        @media (max-width: 480px) {
+            .product {
+                width: 100%; 
+            }
+        }
+        .increase-button,
+        .decrease-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .increase-button:hover {
+            background-color: #0056b3;
+        }
+        .decrease-button {
+            background-color: #dc3545;
+        }
+        .decrease-button:hover {
+            background-color: #c82333;
+        }
+        .product {
+            transition: box-shadow 0.3s ease;
+        }
+        .product:hover {
+            box-shadow: 0 0 20px rgba(0, 64, 255, 0.818); /* Sombra roja al pasar el mouse */
+        }
+        
+        .price {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price span {
+            color: #ff0000;
+            text-decoration: line-through;
+        }
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+        .specs {
+            text-align: left;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .specs p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+		<nav>
+			<img src="Tienda Virtual/logopagtienda1.png" class="logo"/>
+			
+			<ul>
+				<li><a href="#">Inicio</a></li>
+				<li><a href="#">Componentes</a></li>
+				<li><a href="#">Computadoras</a></li>
+				<li><a href="#">Laptops</a></li>
+				<li><a href="#">Monitores</a></li>
+				<a href="#" id="carrito-link">Carrito de Compras</a>
+			</ul>
+		</nav>
+	</header>
+	<div id="carrito-contenedor" class="oculto">
+        <button id="boton-cerrar" class="boton-cerrar">X</button>
+        <section id="cart">
+            <h2>Carrito de Compras</h2>
+            <ul id="cart-items"></ul>
+            <p id="total-price">Total: $0.00</p>
+        </section>
+    </div>
+<br>
+<br>
+<br>
+<h1>Serie <span>Gamer y Streaming</span></h1>
+        <section id="products">
+            <div class="product" id="product10">
+                <img src="Img/SUB-10.webp" alt="PC Gamer Sub">
+                <h3>Disponible</h3>
+                <p>PC Gamer Sub</p>
+				<div class="price">
+                    <span>L 7,200.00</span>
+                    <p>L 7,000.00</p>
+                </div>
+                <button class="add-to-cart" data-product-id="10" data-product-name="Pc Gamer Sub">Añadir al carrito</button>
+                <div class="specs">
+                    <p>CPU: Ryzen 5 4600G</p>
+                    <p>RAM: 8GB 3200MHz</p>
+                    <p>GPU: Radeon Vega 7</p>
+                    <p>SSD: 256GB</p>
+                </div>
+            </div>
+            <div class="product" id="product1">
+                <img src="Img/SUB-10.webp" alt="PC Gamer Sub">
+                <h3>Disponible</h3>
+				<p>PC Gamer Sub</p>
+				<br>
+                <p><B>Precio: L8500.00</B></p>
+                <button class="add-to-cart" data-product-id="1" data-product-name="Laptop Oficina Lenovo V15">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product2">
+                <img src="Tienda Virtual/Img/82JW00Q5LM-LAPTOP-LENOVO-LEGION-5-15.6-FHD-IPS-AMD-RYZEN-7-5800H-3.2-4.4GHZ-16GB-DDR4-3200MHZ.png" alt="Producto 2">
+				<h3>Disponible</h3>
+                <p>LAPTOP LENOVO LEGION 5 RYZEN 7 5800H 15.6″ FULLHD</p>
+				<br>
+                <p><b>Precio: L24750.00</b></p>
+                <button class="add-to-cart" data-product-id="2" data-product-name="LAPTOP LENOVO LEGION 5">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product3">
+                <img src="Tienda Virtual/Img/NOTEBOOK-ASUS-FX507ZC4-HN002-15.6-90NR0GW1-M001F0.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Avanzada ASUS TUF FX507ZC4-HN002 15.6″ FHD IPS</p>
+				<br>
+                <p><b>Precio: L29250.00</b></p>
+                <button class="add-to-cart" data-product-id="3" data-product-name="Laptop Avanzada ASUS TUF FX507ZC4">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product4">
+                <img src="Tienda Virtual/Img/NOTEBOOK-ASUS-FA507RF-HN018-15.6-90NR0HA1-M003Y0.png" alt="Producto 2">
+				<h3>Disponible</h3>
+                <p>LAPTOP ASUS TUF GAMING FA506N A15 15″ FULL HD</p>
+				<br>
+                <p><b>Precio: L20250.00</b></p>
+                <button class="add-to-cart" data-product-id="4" data-product-name="LAPTOP ASUS TUF GAMING A15">Añadir al carrito</button>
+            </div>
+			<div class="product" id="product5">
+                <img src="Tienda Virtual/Img/NOTEBOOK-ASUS-FA507RF-HN018-15.6-90NR0HA1-M003Y0.png" alt="Producto 1">
+                <h3>Disponible</h3>
+				<p>Laptop Avanzada ASUS TUF FA507RF-HN018 15.6″ FHD</p>
+				<br>
+                <p><b>Precio: L20750.00</b></p>
+                <button class="add-to-cart" data-product-id="5" data-product-name="Laptop Avanzada ASUS TUF FA507RF">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product6">
+                <img src="Tienda Virtual/Img/RTX-4060-8gb-msi-ventus-x2-white.png">
+				<h3>Disponible</h3>
+                <p>TARJETA GRAFICA MSI RTX 4060 8GB WHITE VENTUS GDDR6 FANS</p>
+				<br>
+                <p><b>Precio: L9375.00</b></p>
+                <button class="add-to-cart" data-product-id="6" data-product-name="TARJETA GRAFICA MSI RTX 4060">Añadir al carrito</button>
+            </div>
+        </section>
+
+    <script src="Tienda Virtual/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Desplegable</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Fondo claro */
+}
+
+nav {
+    background-color: #1c1c1c;
+    padding: 10px 20px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+}
+
+.search input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-count {
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submenu li {
+    width: 200px;
+}
+
+.submenu li a {
+    padding: 10px 15px;
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+.submenu li a:hover {
+    background-color: #f0f0f0;
+}
+
+.submenu li:last-child a {
+    border-bottom: none;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .submenu {
+    left: 100%;
+    top: 0;
+    margin-left: 1px;
+}
+
+.dropdown-submenu:hover > .submenu {
+    display: block;
+}
+
+/* Especifico para el diseño del logo */
+.logo img {
+    max-height: 40px; /* Ajusta la altura del logo si es necesario */
+}
+
+/* Ajuste para la búsqueda y los íconos */
+.search input {
+    width: 200px; /* Ajusta el ancho de la barra de búsqueda */
+}
+
+/* Estilo para la imagen del carrito */
+.carrito-icon {
+    width: 30px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    height: auto;
+    vertical-align: middle; /* Alinea la imagen verticalmente con el texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+    transition: transform 0.3s; /* Efecto de transformación suave */
+}
+
+.carrito-icon:hover {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el ratón */
+}
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li class="logo"><a href="#"><img src="logo.png" alt="Logo"></a></li>
+            <li class="menu-item dropdown">
+                <a href="#" class="menu-link">Componentes</a>
+                <ul class="submenu">
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Almacenamiento</a></li>
+                    <li><a href="#">Periféricos</a></li>
+                    <li><a href="#">Case</a></li>
+                    <li><a href="#">Cooler y Refrigeración</a></li>
+                    <li><a href="#">Fuentes de Poder</a></li>
+                    <li><a href="#">Memorias RAM</a></li>
+                    <li><a href="#">Placas Base</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Tarjetas Gráficas</a></li>
+                </ul>
+            </li>
+            <li class="menu-item dropdown">
+                <a href="#" class="menu-link">Computadoras</a>
+                <ul class="submenu">
+                    <li><a href="#">PC Gamer</a></li>
+                    <li><a href="#">PC Productividad</a></li>
+                    <li><a href="#">PC Completa</a></li>
+                </ul>
+            </li>
+            <li class="menu-item"><a href="#" class="menu-link">Laptops</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Monitores</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Periféricos</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Ofertas</a></li>
+            <li class="menu-item search"><input type="text" placeholder="Buscar productos"></li>
+            <li class="menu-item">
+                <a href="#" id="carrito-link"><img src="Tienda Virtual/Img/1656456.png" alt="Carrito de Compras" class="carrito-icon"></a>
+            </li>
+        </ul>
+    </nav>
+    <div id="carrito-contenedor" class="oculto">
+        <button id="boton-cerrar" class="boton-cerrar">X</button>
+        <section id="cart">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items" class="cart-items-container">
+                <!-- Los elementos del carrito se añadirán dinámicamente aquí -->
+            </div>
+            <p id="total-price">Total: $0.00</p>
+        </section>
+    </div>
+    <script src="Tienda Virtual/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda Virtual</title>
+    <link rel="stylesheet" href="Tienda Virtual/styles.css">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.product img {
+    max-width: 100%; /* Ajustar el ancho máximo para que se adapte al contenedor */
+    height: auto; /* Permitir que la altura se ajuste automáticamente */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Fondo claro */
+}
+
+nav {
+    background-color: #1c1c1c;
+    padding: 10px 20px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+}
+
+.search input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-count {
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.submenu li {
+    width: 200px;
+}
+
+.submenu li a {
+    padding: 10px 15px;
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+.submenu li a:hover {
+    background-color: #f0f0f0;
+}
+
+.submenu li:last-child a {
+    border-bottom: none;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .submenu {
+    left: 100%;
+    top: 0;
+    margin-left: 1px;
+}
+
+.dropdown-submenu:hover > .submenu {
+    display: block;
+}
+
+/* Especifico para el diseño del logo */
+.logo img {
+    max-height: 40px; /* Ajusta la altura del logo si es necesario */
+}
+
+/* Ajuste para la búsqueda y los íconos */
+.search input {
+    width: 200px; /* Ajusta el ancho de la barra de búsqueda */
+}
+
+/* Estilo para la imagen del carrito */
+.carrito-icon {
+        width: 30px; /* Ajusta el tamaño de la imagen según tus necesidades */
+        height: auto;
+        vertical-align: middle; /* Alinea la imagen verticalmente con el texto */
+        cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+        transition: transform 0.3s; /* Efecto de transformación suave */
+        padding: 0 15px; /* Añade padding de 15px hacia la izquierda y hacia la derecha */
+    }
+
+    .carrito-icon:hover {
+        transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el ratón */
+    }
+        #carrito-contenedor {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100%;
+            background-color: #f8f9fa;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        
+        .boton-cerrar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #333;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease; /* Transición del color al pasar el ratón */
+        }
+        
+        .boton-cerrar:hover {
+            color: #f00;
+        }
+        
+        #carrito-contenedor {
+            transition: transform 0.5s ease-out;
+        }
+        
+        .oculto {
+            transform: translateX(100%);
+        }
+        
+#carrito-contenedor.mostrar {
+    transform: translateX(0);
+}
+
+
+@media (max-width: 1200px) {
+    #carrito-contenedor {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    #carrito-contenedor {
+        width: 60%; 
+    }
+}
+
+@media (max-width: 480px) {
+    #carrito-contenedor {
+        width: 80%; 
+    }
+}
+
+
+
+        .product-image {
+            width: 5%;
+            float: left;
+            margin-right: 10px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item img {
+            width: 60px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .cart-item h4 {
+            margin: 0;
+            font-size: 1em;
+        }
+        .cart-item p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        #cart h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #total-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .add-to-cart {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+        .contenedor-principal {
+            max-width: 100%;
+            background-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1));
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contenedor-imagen {
+            width: 420px; 
+            height: 420px; 
+            overflow: hidden; 
+            border: 1px solid #ccc;
+            display: inline-block; 
+            margin: 0 5px;
+            border-radius: 15px;
+            position: relative;
+        }
+        .imagen {
+            width: 100%; 
+            height: auto; 
+            transition: transform 1s;
+        }
+        .imagen:hover {
+            transform: scale(1.2); 
+        }
+        .texto {
+            position: absolute;
+            bottom: 20px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .texto h2 {
+            margin-bottom: 10px;
+            color: white; 
+        }
+        .texto p {
+            color: white; 
+        }
+        .texto button {
+            border: 1px solid white; 
+            background-color: transparent; 
+            color: transparent; 
+            padding: 10px 20px; 
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s; 
+            color: white;
+        }
+        .texto button:hover {
+            background-color: white; 
+            color: black;
+        }
+        #products {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 5px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 10px;
+        }
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            padding: 5px;
+            text-align: center;
+            position: relative;
+        }
+        @media (max-width: 1200px) {
+            .product {
+                width: calc(100% / 4 - 20px); 
+            }
+        }
+        @media (max-width: 768px) {
+            .product {
+                width: calc(100% / 3 - 20px);
+            }
+        }
+        @media (max-width: 480px) {
+            .product {
+                width: calc(100% / 2 - 50px);
+            }
+        }
+        .increase-button,
+        .decrease-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .increase-button:hover {
+            background-color: #0056b3;
+        }
+        .decrease-button {
+            background-color: #dc3545;
+        }
+        .decrease-button:hover {
+            background-color: #c82333;
+        }
+        .product {
+            transition: box-shadow 0.3s ease;
+        }
+        .product:hover {
+            box-shadow: 0 0 20px rgba(0, 64, 255, 0.818); /* Sombra roja al pasar el mouse */
+        }
+        
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+        .specs {
+            text-align: left;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .specs p {
+            margin: 5px 0;
+        }
+        .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Aquí se define el espacio entre los elementos de carrito */
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Aquí se define el borde inferior entre elementos */
+}
+
+#cart {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+#cart-items li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+#cart-items li .price {
+    flex-grow: 1;
+    text-align: right;
+}
+
+        .price-padding {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 15PX;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+                
+footer{
+    bottom: 0;
+    left: 0;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--dark);
+    color: white;
+    background-color: #121212;
+}
+
+.copyright-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.copyright{
+    font-size: 12px;
+    opacity: 0.7;
+    font-weight: 400;
+    padding: 10px 0;
+}
+
+.footer-menus{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 40%;
+}
+
+.footer-container{
+    height: fit-content;
+    width: 100%;
+    padding: 3rem 6rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-content-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+footer .website-logo{
+    margin-bottom: 1.2rem;
+    font-size: calc(1vw + 20px);
+}
+
+.footer-info, .menu-item-footer{
+    margin: 0.2rem 0;
+    opacity: 0.7;
+    color: white;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.menu-item-footer:hover{
+    opacity: 1;
+}
+
+.menu-title{
+    font-size: var(--medium-text-font);
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+}
+
+.social-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 100%;
+}
+
+.social-link{
+    height: 100%;
+    width: 30px;
+    background-image: url(FacebookBlanco.png);
+    background-size: 70%;
+    background-position: center;
+    margin-right: 1rem;
+    background-repeat: no-repeat;
+}
+
+.social-link:hover{
+    opacity: 0.7;
+}
+
+footer .social-link:nth-of-type(2){
+    background-image: url(TwitterBlanco.png);
+}
+
+footer .social-link:nth-of-type(3){
+    background-image: url(LinkedinBlanco.png);
+}
+
+
+/*MEDIA QUERY*/
+@media (max-width: 768px){
+    
+    .footer-container{
+        padding: 2rem;
+        flex-direction: column;
+    }
+
+    .footer-content-container{
+        width: 100%;
+        padding: 2rem 0;
+        border-bottom: 1px solid #2A2A2A;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-content-container:nth-of-type(1){
+        align-items: flex-start;
+    }
+    .footer-content-container:nth-of-type(3){
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .footer-menus{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1px solid #2A2A2A;
+    }
+
+    .footer-menus .footer-content-container:nth-of-type(1){
+        width: 45%;
+        align-items: flex-start;
+        border-bottom: none;
+    }
+    .footer-menus .footer-content-container:nth-of-type(2){
+        width: 45%;
+        align-items: flex-start;
+        border-bottom: none;
+    }
+}
+ .container{
+    float: left; 
+    margin-right: 10px; 
+    width: 400px ; 
+    height: 1785px;
+    margin-left: 20px;
+    background-color: #f3efef;
+    border-radius: 20px;
+ }
+ .bebe{
+    margin: 30px;
+ }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li class="logo"><a href="#"><img src="logopagtienda1.png" alt="Logo"></a></li>
+            <li class="menu-item dropdown">
+                <a href="#" class="menu-link">Componentes</a>
+                <ul class="submenu">
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Almacenamiento</a></li>
+                    <li><a href="#">Periféricos</a></li>
+                    <li><a href="#">Case</a></li>
+                    <li><a href="#">Cooler y Refrigeración</a></li>
+                    <li><a href="#">Fuentes de Poder</a></li>
+                    <li><a href="#">Memorias RAM</a></li>
+                    <li><a href="#">Placas Base</a></li>
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Tarjetas Gráficas</a></li>
+                </ul>
+            </li>
+            <li class="menu-item dropdown">
+                <a href="#" class="menu-link">Computadoras</a>
+                <ul class="submenu">
+                    <li><a href="#">PC Gamer</a></li>
+                    <li><a href="#">PC Productividad</a></li>
+                    <li><a href="#">PC Completa</a></li>
+                </ul>
+            </li>
+            <li class="menu-item"><a href="#" class="menu-link">Laptops</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Monitores</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Periféricos</a></li>
+            <li class="menu-item"><a href="#" class="menu-link">Ofertas</a></li>
+            <li class="menu-item search"><input type="text" placeholder="Buscar productos"></li>
+            <li class="menu-item">
+                <a href="#" id="carrito-link"><img src="Img/3144456.png" alt="Carrito de Compras" class="carrito-icon"></a>
+            </li>
+        </ul>
+    </nav>
+	<div id="carrito-contenedor" class="oculto">
+        <button id="boton-cerrar" class="boton-cerrar">X</button>
+        <section id="cart">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items" class="cart-items-container">
+                <!-- Los elementos del carrito se añadirán dinámicamente aquí -->
+            </div>
+            <p id="total-price">Total: $0.00</p>
+        </section>
+    </div>
+<br><br>
+<h1 style=" font-size: 2.3em; color: #0062ff; text-align: center;">Almacenamiento</h1>
+<br>
+<div class="container" >
+    <div class="bebe" >
+        <h2 style="text-align: center;">Categoria Productos</h2>
+    </div >
+</div >
+<div style="float: right; margin-right: 80px;" >
+        <section id="products">
+            <div class="product" id="product27">
+                <img src="imga/Unidad-de-estado-solido-TEAMGROUP-MP44L-500GB.webp" alt="PC Gamer Sub">
+                <h2>SSD 500GB MP44L M.2 NVME PCIE 4.0 TEAMGROUP</h2>
+                    <p class="price-padding">Precio: L1,400.00</p>
+                <button class="add-to-cart" data-product-id="27" data-product-name="SSD 500GB MP44L M.2 NVME PCIE 4.0 TEAMGROUP">Añadir al carrito</button> 
+            </div>
+            <div class="product" id="product28">
+                <img src="imga/TM8PS7512G0C101-512GB-TEAMGROUP.webp" alt="PC Gamer Sub">
+                <h2>SSD 512GB MS30 M.2 SATA III TEAMGROUP</h2>
+                <p class="price-padding">Precio: L965.00</p>
+                <button class="add-to-cart" data-product-id="28" data-product-name="SSD 512GB MS30 M.2 SATA III TEAMGROUP">Añadir al carrito</button>  
+            </div>
+            <div class="product" id="product29">
+                <img src="imga/ssd-256-gb-sata-t-force-t253tz256g0c101.webp" alt="PC Gamer Junior">
+                <h2>SSD 256GB SATA 2.5″ T-FORCE BLACK</h2>
+                <p class="price-padding">Precio: L650.00</p>
+                <button class="add-to-cart" data-product-id="29" data-product-name="SSD 256GB SATA 2.5″ T-FORCE BLACk">Añadir al carrito</button> 
+            </div>
+            <div class="product" id="product30">
+                <img src="imga/SSD-256GB-TEAMGROUP-TM8FP6256G0C101.webp" alt="PC Gamer Entusiasta">
+                <h2>SSD 256GB M.2 PCIe 3.0 NVME TEANGROUP</h2>
+                <p class="price-padding">Precio: L645.00</p>
+                <button class="add-to-cart" data-product-id="30" data-product-name="SSD 256GB M.2 PCIe 3.0 NVME TEANGROUP">Añadir al carrito</button>  
+            </div>
+            <div class="product" id="product31">
+                <img src="imga/ssd-512gb-sata-III-2.5-hiksemi.webp" alt="PC Gamer Medlum">
+                <h2>SSD 512GB SATA III 2.5 HIKSEMI</h2>
+                    <p class="price-padding">Precio: L870.00</p>
+                <button class="add-to-cart" data-product-id="31" data-product-name="SSD 512GB SATA III 2.5 HIKSEMI">Añadir al carrito</button>   
+            </div>
+            <div class="product" id="product32">
+                <img src="imga/ssd-2tb.webp" alt="PC Gamer Plus ECO">
+                <h2>SSD 2TB M.2 NVME PCIe 4.0 TC CLASSIC</h2>
+                <p class="price-padding">Precio: L3,000.00</p>
+                <button class="add-to-cart" data-product-id="32" data-product-name="SSD 2TB M.2 NVME PCIe 4.0 TC CLASSIC">Añadir al carrito</button>  
+            </div>
+            <div class="product" id="product33">
+                <img src="imga/2tb.webp" alt="PC Gamer Pro">
+                <h2>SSD 2TB 2.5″ SATA QX 3D NAND QLC TEAMGROUP</h2>
+                <p class="price-padding">Precio: L2,900.00</p>
+                <button class="add-to-cart" data-product-id="33" data-product-name="SSD 2TB 2.5″ SATA QX 3D NAND QLC TEAMGROUP">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product34">
+                <img src="imga/ssd.webp" alt="PC Gamer BLACK">
+                <h2>SSD 1TB SATA 2.5″ TEANGROUP CX2</h2>
+                <p class="price-padding">Precio: L1,850.00</p>
+                <button class="add-to-cart" data-product-id="34" data-product-name="SSD 1TB SATA 2.5″ TEANGROUP CX2">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product35">
+                <img src="imga/2tb (1).webp" alt="PC Gamer BLACK">
+                <h2>SEAGATE BARRACUDA 2TB 7200 RPM 3.5″</h2>
+                <p class="price-padding">Precio: L1,850.00</p>
+                <button class="add-to-cart" data-product-id="35" data-product-name="SEAGATE BARRACUDA 2TB 7200 RPM 3.5″">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product36">
+                <img src="imga/hp.webp" alt="PC Gamer BLACK">
+                <h2>SSD 240GB SATA 2.5″ HP III S650</h2>
+                <p class="price-padding">Precio: L530.00</p>
+                <button class="add-to-cart" data-product-id="36" data-product-name="SSD 240GB SATA 2.5″ HP III S650">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product37">
+                <img src="imga/ssd (1).webp" alt="PC Gamer BLACK">
+                <h2>SD 512GB SATA 2.5″ CX2 TEAN GROUP</h2>
+                <p class="price-padding">Precio: L930.00</p>
+                <button class="add-to-cart" data-product-id="37" data-product-name="SD 512GB SATA 2.5″ CX2 TEAN GROUP">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product38">
+                <img src="imga/2tb (2).webp" alt="PC Gamer BLACK">
+                <h2>SSD 2TB NV2 NVME M.2 PCIe 4.0 KINGSTON</h2>
+                <p class="price-padding">Precio: L3,300.00</p>
+                <button class="add-to-cart" data-product-id="38" data-product-name="SSD 2TB NV2 NVME M.2 PCIe 4.0 KINGSTON">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product39">
+                <img src="imga/128gb.webp" alt="PC Gamer BLACK">
+                <h2>SSD 128GB M.2 SATA HIKVISION E100N</h2>
+                <p class="price-padding">Precio: L325.00</p>
+                <button class="add-to-cart" data-product-id="39" data-product-name="SSD 128GB M.2 SATA HIKVISION E100N">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product40">
+                <img src="imga/BLACK-500GB-WD.webp" alt="PC Gamer BLACK">
+                <h2>SSD 500GB WD BLACK SN770 M.2 NVME 2280 PCIe</h2>
+                <p class="price-padding">Precio: L2,075.00</p>
+                <button class="add-to-cart" data-product-id="40" data-product-name="SSD 500GB WD BLACK SN770 M.2 NVME 2280 PCIe 4.0">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product41">
+                <img src="imga/500GB-KING-4.0.webp" alt="PC Gamer BLACK">
+                <h2>SSD 500GB KINGSTON NV2 M.2 NVME PCIE 4.0</h2>
+                <p class="price-padding">Precio: L1,200.00</p>
+                <button class="add-to-cart" data-product-id="41" data-product-name="SSD 500GB KINGSTON NV2 M.2 NVME PCIE 4.0 2280">Añadir al carrito</button>
+            </div>
+            <div class="product" id="product42">
+                <img src="imga/hdd.webp" alt="PC Gamer BLACK">
+                <h2>WD BLUE, 2TB, SATA 6.0 GB/S, 256 MB CACHE</h2>
+                <p class="price-padding">Precio: L1,700.00</p>
+                <button class="add-to-cart" data-product-id="42" data-product-name="WD BLUE, 2TB, SATA 6.0 GB/S, 256 MB CACHE">Añadir al carrito</button>
+            </div>
+        </section>
+    </div>
+        <br>
+        <br>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-content-container">
+                    <h3 class="website-logo">Gamer Store</h3>
+                    <span class="footer-info">+504 9632 1907</span>
+                    <span class="footer-info">tiendagamerstore1@gmail.com</span>
+                </div>
+                <div class="footer-menus">
+                    <div class="footer-content-container">
+                        <span class="menu-title">menu</span>
+                        <a href="" class="menu-item-footer">Inicio</a>
+                        <a href="" class="menu-item-footer">Productos</a>
+                        <a href="" class="menu-item-footer">Preguntas Frecuentes</a>
+                    </div>
+                    <div class="footer-content-container">
+                        <span class="menu-title">legal</span>
+                        <a href="" class="menu-item-footer">Politica de Privacidad</a>
+                        <a href="" class="menu-item-footer">Cookies</a>
+                        <a href="" class="menu-item-footer">Legal Advice</a>
+                    </div>
+                </div>
+                
+                <div class="footer-content-container">
+                    <span class="menu-title">follow us</span>
+                    <div class="social-container">
+                        <a href="" class="social-link"></a>
+                        <a href="" class="social-link"></a>
+                        <a href="" class="social-link"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-container">
+                <span class="copyright"> © Copyright 2024, Augusto Melara. Derechos Reservados.</span>
+            </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
